@@ -9,7 +9,7 @@
       </movie-item>
     </div>
     <div v-else-if="movies.length">
-      No Results.
+      {{ noResults }}
     </div>
     <div v-else>
       Loading...
@@ -62,10 +62,15 @@
               .filter(movie => movie.sessions.find(this.sessionPassesTimeFilter));
       // if (!this.genre.length) return this.movies;
       // return this.movies.filter(movie => this.genre.find(genre => movie.genre === genre));
+    },
+    noResults() {
+      let times = this.time.join(', ');
+      let genres = this.genre.join(', ');
+      return `No results for ${times}${ times.length && genres.length ? ', ' : ' ' }${genres}.`;
     }
   },
   created() {
-    console.log(this.$moment);
+    //console.log(this.$moment);
   }
 }
 </script>
